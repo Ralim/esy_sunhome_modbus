@@ -38,6 +38,11 @@ These registers are read-only and contain real-time measurements.
 
 | Register            | Address | Name                   | Type   | Unit | Scale | Description                                                        |
 | ------------------- | ------- | ---------------------- | ------ | ---- | ----- | ------------------------------------------------------------------ |
+| **HARDWARE**        |
+| R1                  | 1       | MCU SW Version         | UINT16 | -    | 1     | MCU Software Version                                               |
+| R2                  | 2       | DSP SW Version         | UINT16 | -    | 1     | DSP Software Version                                               |
+| R3                  | 3       | MCU HW Version         | UINT16 | -    | 1     | MCU Hardware Version                                               |
+| R4                  | 4       | DSP HW Version         | UINT16 | -    | 1     | DSP Hardware Version                                               |
 | **BATTERY**         |
 | R29                 | 28      | Battery Mode           | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
 | R32                 | 31      | Battery Power          | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
