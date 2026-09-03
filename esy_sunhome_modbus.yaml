@@ -224,6 +224,33 @@ sensor:
             return x;
           }
 
+  # Register 30 (Address 29) - Battery Pack Voltage
+  # Pack is a 16S LiFePo4, so you expect 16 cells of 3.2V each nominally
+  - platform: modbus_controller
+    modbus_controller_id: sunhome
+    name: "Battery Pack Voltage"
+    address: 29
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+  # Register 31 (Address 30) - Battery Pack Current
+  - platform: modbus_controller
+    modbus_controller_id: sunhome
+    name: "Battery Pack Current"
+    address: 30
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
   # Register 33 (Address 32) - Battery State of Charge
   - platform: modbus_controller
     modbus_controller_id: sunhome

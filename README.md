@@ -46,6 +46,8 @@ These registers are read-only and contain real-time measurements.
 | **BATTERY**         |
 | R16                 | 15      | Battery Mode                | UINT16 | Wh   | 1     | Rated Battery Capacity                                             |
 | R29                 | 28      | Battery Mode                | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
+| R30                 | 29      | Battery Pack Voltage        | UINT16 | V    | 0.1   |                                                                    |
+| R31                 | 30      | Battery Pack Current        | UINT16 | A    | 0.1   |                                                                    |
 | R32                 | 31      | Battery Power               | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
 | R33                 | 32      | Battery SOC                 | UINT16 | %    | 1     | State of Charge (0-100%)                                           |
 | **SOLAR / PV**      |
