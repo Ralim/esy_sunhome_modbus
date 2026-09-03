@@ -14,7 +14,7 @@ esp32:
 # Enable logging
 logger:
   level: DEBUG
-  baud_rate: 0  # Disable UART logging since we're using UART for Modbus
+  baud_rate: 0 # Disable UART logging since we're using UART for Modbus
   logs:
     modbus_controller: DEBUG
     modbus: DEBUG
@@ -37,13 +37,13 @@ wifi:
 #   broker: !secret mqtt_host
 #   username: !secret mqtt_username
 #   password: !secret mqtt_password
-  
+
 captive_portal:
 
 # Configure UART for RS485 communication
 uart:
   id: modbus_uart
-  tx_pin: GPIO2 
+  tx_pin: GPIO2
   rx_pin: GPIO1
   baud_rate: 9600
   parity: NONE
@@ -53,6 +53,7 @@ uart:
 modbus:
   id: mbus
   uart_id: modbus_uart
+  turnaround_time: 10ms
   # If your M5 Isolated RS485 is NOT auto-direction, uncomment and set a GPIO:
   # flow_control_pin: GPIO5
 
@@ -61,15 +62,14 @@ globals:
   - id: update_interval_ms
     type: int
     restore_value: yes
-    initial_value: '15000'
+    initial_value: "15000"
 
 modbus_controller:
   - id: sunhome
     modbus_id: mbus
-    address: 0x01  # Modbus slave address
+    address: 0x01 # Modbus slave address
     setup_priority: -10
     update_interval: 5s # Default, will be overridden
-    command_throttle: 10ms
 
 text_sensor:
   - platform: template
@@ -87,7 +87,7 @@ text_sensor:
     update_interval: never
     lambda: |-
       return {};
-  
+
   # WiFi Info
   - platform: wifi_info
     ip_address:
@@ -184,7 +184,7 @@ sensor:
           int mode = (int) id(battery_code).state;
 
           if (mode == 5) {
-            return -x; 
+            return -x;
           } else {
             return x;
           }
@@ -231,7 +231,7 @@ sensor:
     state_class: measurement
     icon: "mdi:solar-panel"
     value_type: U_WORD
-    
+
   # ============================================================
   # GRID REGISTERS (Input Registers)
   # ============================================================
@@ -520,9 +520,9 @@ sensor:
     restore: true
     accuracy_decimals: 3
     filters:
-      - lambda: return max(0.0f, -x);  # Only count negative (export), make positive
-      - multiply:  0.001
-          
+      - lambda: return max(0.0f, -x); # Only count negative (export), make positive
+      - multiply: 0.001
+
   # Grid Export Energy (only when negative, converted to positive)
   - platform: integration
     id: grid_export_energy
@@ -536,7 +536,7 @@ sensor:
     restore: true
     accuracy_decimals: 3
     filters:
-      - lambda: return max(0.0f, x);  # Only count positive (import)
+      - lambda: return max(0.0f, x); # Only count positive (import)
       - multiply: 0.001
 
   # Power when charging (>=0)
@@ -594,7 +594,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.001
-  
+
   - platform: uptime
     name: "${friendly_name} Uptime"
     icon: "mdi:clock-outline"
