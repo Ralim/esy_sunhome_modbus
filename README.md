@@ -2,7 +2,7 @@
 
 A work-in-progress ESPHome configuration for monitoring the ESY Sunhome HM6 via Modbus RS485.
 
-For those who are looking to purchase/install a sunhome battery, get $50 off using my code: AU1587 when you register and set up the ESY sunhome app. 
+For those who are looking to purchase/install a sunhome battery, get $50 off using my code: AU1587 when you register and set up the ESY sunhome app.
 
 If, like me, you're switching to Amber for wholesale rates, use my code QVLA4DT4 to get $120 off.
 
@@ -20,10 +20,10 @@ If, like me, you're switching to Amber for wholesale rates, use my code QVLA4DT4
 
 ```
 ESP32-S3        RS485 Module        Inverter
-GPIO2 (TX)  --> TX/DI           
-GPIO1 (RX)  <-- RX/RO           
-5V          --> VCC                 
-GND         --> GND                 
+GPIO2 (TX)  --> TX/DI
+GPIO1 (RX)  <-- RX/RO
+5V          --> VCC
+GND         --> GND
                 A/+ (RS485)     --> A/+ (PIN 5)
                 B/- (RS485)     --> B/- (PIN 4)
 ```
@@ -36,37 +36,38 @@ All registers discovered and documented below. Addresses shown are 0-based (as u
 
 These registers are read-only and contain real-time measurements.
 
-| Register | Address | Name | Type | Unit | Scale | Description |
-|----------|---------|------|------|------|-------|-------------|
-| **BATTERY**             |
-| R29 | 28 | Battery Mode | UINT16 | - | 1 | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
-| R32 | 31 | Battery Power | INT16 | W | 1 | Positive=Charging, Negative=Discharging |
-| R33 | 32 | Battery SOC | UINT16 | % | 1 | State of Charge (0-100%) |
-| **SOLAR / PV** |
-| R23 | 22 | PV1 Power | UINT16 | W | 1 | Solar Panel String 1 Power |
-| R26 | 25 | PV2 Power | UINT16 | W | 1 | Solar Panel String 2 Power |
-| **GRID**             |
-| R40 | 39 | Grid Frequency | UINT16 | Hz | 0.01 | AC Grid Frequency (e.g., 5000 = 50.00 Hz) |
-| R43 | 42 | Grid AC Voltage | UINT16 | V | 0.1 | AC Grid Voltage (e.g., 2300 = 230.0V) |
-| R50 | 49 | Grid Power | INT16 | W | 1 | Positive=Import, Negative=Export |
-| R55 | 54 | Grid Frequency Alt | UINT16 | Hz | 0.01 | Alternate frequency reading |
-| **LOAD**             |
-| R91 | 90 | Load Power | UINT16 | W | 1 | Total household load power |
-| **INVERTER STATUS**             |
-| R58 | 57 | External PV AC Voltage | UINT16 | V | 0.1 | External AC voltage reading |
-| R76 | 75 | Internal PV AC Voltage | UINT16 | V | 0.1 | Internal AC voltage reading |
+| Register            | Address | Name                   | Type   | Unit | Scale | Description                                                        |
+| ------------------- | ------- | ---------------------- | ------ | ---- | ----- | ------------------------------------------------------------------ |
+| **BATTERY**         |
+| R29                 | 28      | Battery Mode           | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
+| R32                 | 31      | Battery Power          | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
+| R33                 | 32      | Battery SOC            | UINT16 | %    | 1     | State of Charge (0-100%)                                           |
+| **SOLAR / PV**      |
+| R23                 | 22      | PV1 Power              | UINT16 | W    | 1     | Solar Panel String 1 Power                                         |
+| R26                 | 25      | PV2 Power              | UINT16 | W    | 1     | Solar Panel String 2 Power                                         |
+| **GRID**            |
+| R40                 | 39      | Grid Frequency         | UINT16 | Hz   | 0.01  | AC Grid Frequency (e.g., 5000 = 50.00 Hz)                          |
+| R43                 | 42      | Grid AC Voltage        | UINT16 | V    | 0.1   | AC Grid Voltage (e.g., 2300 = 230.0V)                              |
+| R50                 | 49      | Grid Power             | INT16  | W    | 1     | Positive=Import, Negative=Export                                   |
+| R55                 | 54      | Grid Frequency Alt     | UINT16 | Hz   | 0.01  | Alternate frequency reading                                        |
+| **LOAD**            |
+| R91                 | 90      | Load Power             | UINT16 | W    | 1     | Total household load power                                         |
+| **INVERTER STATUS** |
+| R58                 | 57      | External PV AC Voltage | UINT16 | V    | 0.1   | External AC voltage reading                                        |
+| R76                 | 75      | Internal PV AC Voltage | UINT16 | V    | 0.1   | Internal AC voltage reading                                        |
 
 ### Holding Registers (Function Code 3)
 
 These registers may be read/write and typically contain configuration or accumulation values.
 
-| Register | Address | Name | Type | Unit | Scale | Description |
-|----------|---------|------|------|------|-------|-------------|
-| R31 | 30 | Daily Power Generation | UINT16 | kWh | 0.001 | Daily solar generation (resets daily) |
+| Register | Address | Name                   | Type   | Unit | Scale | Description                           |
+| -------- | ------- | ---------------------- | ------ | ---- | ----- | ------------------------------------- |
+| R31      | 30      | Daily Power Generation | UINT16 | kWh  | 0.001 | Daily solar generation (resets daily) |
 
 ## Sensors Provided
 
 ### Real-Time Power Sensors
+
 - **PV1 Power** - Solar string 1 output (W)
 - **PV2 Power** - Solar string 2 output (W)
 - **Total PV Power** - Combined solar output (W)
@@ -75,21 +76,25 @@ These registers may be read/write and typically contain configuration or accumul
 - **Load Power** - House consumption (W)
 
 ### Voltage & Frequency
+
 - **Grid AC Voltage** - Main voltage (V)
 - **Grid Frequency** - Grid frequency (Hz)
 - **External PV AC Voltage** - External voltage reading (V)
 - **Internal PV AC Voltage** - Internal voltage reading (V)
 
 ### Battery Status
+
 - **Battery SOC** - State of Charge (%)
 - **Battery Mode** - Text: Charging/Discharging/Full/etc.
 
 ### Calculated Sensors
+
 - **Net Power Flow** - Overall grid import/export (W)
 - **Battery Power Flow** - Simplified battery power indicator (W)
 - **Self Consumption** - Percentage of solar used directly (%)
 
 ### Energy Integration Sensors
+
 All accumulate energy over time for Home Assistant Energy Dashboard:
 
 - **PV1 Energy** - Energy from string 1 (kWh)
@@ -102,20 +107,22 @@ All accumulate energy over time for Home Assistant Energy Dashboard:
 - **Battery Discharge Energy** - Energy used from battery (kWh)
 
 ### Daily Counter
+
 - **Daily Power Generation** - Today's solar generation (kWh, from inverter)
 
 ## Understanding Power Flow
 
 ### Positive/Negative Sign Convention
 
-| Sensor | Positive (+) | Negative (-) |
-|--------|-------------|-------------|
-| **Battery Power** | Charging | Discharging |
-| **Grid Power** | Importing (buying) | Exporting (selling) |
+| Sensor            | Positive (+)       | Negative (-)        |
+| ----------------- | ------------------ | ------------------- |
+| **Battery Power** | Charging           | Discharging         |
+| **Grid Power**    | Importing (buying) | Exporting (selling) |
 
 ### Example Scenarios
 
 **Scenario 1: Sunny Day, Low Load**
+
 - PV Power: 4000W
 - Load Power: 500W
 - Battery Power: +2000W (charging)
@@ -123,6 +130,7 @@ All accumulate energy over time for Home Assistant Energy Dashboard:
 - Self Consumption: 50%
 
 **Scenario 2: Evening, Battery Discharging**
+
 - PV Power: 0W
 - Load Power: 800W
 - Battery Power: -800W (discharging)
@@ -130,6 +138,7 @@ All accumulate energy over time for Home Assistant Energy Dashboard:
 - Self Consumption: 0% (no solar)
 
 **Scenario 3: Morning, Battery Full**
+
 - PV Power: 2000W
 - Load Power: 300W
 - Battery Power: 0W (full)
@@ -139,15 +148,17 @@ All accumulate energy over time for Home Assistant Energy Dashboard:
 ## Configuration
 
 ### Modbus Settings
+
 - **Baud Rate**: 9600
 - **Parity**: None
 - **Stop Bits**: 1
 - **Slave Address**: 0x01 (1)
-- **Function Codes**: 
+- **Function Codes**:
   - FC3 (Read Holding Registers) - Energy counters
   - FC4 (Read Input Registers) - Real-time values
 
 ### Update Interval
+
 Default: 10 seconds (adjustable via dropdown: 5/10/15/30/60 seconds)
 
 The update interval can be changed dynamically through Home Assistant without rebooting the ESP32.
@@ -155,6 +166,7 @@ The update interval can be changed dynamically through Home Assistant without re
 ## Home Assistant Integration
 
 ### Automatic Discovery
+
 All sensors automatically appear in Home Assistant via the API.
 
 ## Troubleshooting
@@ -174,20 +186,20 @@ To add a new register:
   modbus_controller_id: sunhome
   id: my_new_sensor
   name: "My New Sensor"
-  register_type: read        # or 'holding'
-  address: 42                # 0-based address
+  register_type: read # or 'holding'
+  address: 42 # 0-based address
   unit_of_measurement: "W"
   device_class: power
   state_class: measurement
-  value_type: U_WORD         # or S_WORD, U_DWORD, etc.
+  value_type: U_WORD # or S_WORD, U_DWORD, etc.
   filters:
-    - multiply: 0.1          # if scaling needed
+    - multiply: 0.1 # if scaling needed
   accuracy_decimals: 1
 ```
 
 ## Credits
 
-Thanks to Wes Pope for the initial findings: [@wes314](https://github.com/wes314/ESY-Sunhome-MODBUS/tree/main) 
+Thanks to Wes Pope for the initial findings: [@wes314](https://github.com/wes314/ESY-Sunhome-MODBUS/tree/main)
 
 ## Screenshot
 
