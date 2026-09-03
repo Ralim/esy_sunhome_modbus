@@ -39,17 +39,19 @@ These registers are read-only and contain real-time measurements.
 | Register            | Address | Name                        | Type   | Unit | Scale | Description                                                        |
 | ------------------- | ------- | --------------------------- | ------ | ---- | ----- | ------------------------------------------------------------------ |
 | **HARDWARE**        |
-| R1                  | 1       | MCU SW Version              | UINT16 | -    | 1     | MCU Software Version                                               |
-| R2                  | 2       | DSP SW Version              | UINT16 | -    | 1     | DSP Software Version                                               |
-| R3                  | 3       | MCU HW Version              | UINT16 | -    | 1     | MCU Hardware Version                                               |
-| R4                  | 4       | DSP HW Version              | UINT16 | -    | 1     | DSP Hardware Version                                               |
+| R2                  | 1       | MCU SW Version              | UINT16 | -    | 1     | MCU Software Version                                               |
+| R3                  | 2       | DSP SW Version              | UINT16 | -    | 1     | DSP Software Version                                               |
+| R4                  | 3       | MCU HW Version              | UINT16 | -    | 1     | MCU Hardware Version                                               |
+| R5                  | 4       | DSP HW Version              | UINT16 | -    | 1     | DSP Hardware Version                                               |
 | **BATTERY**         |
+| R16                 | 15      | Battery Mode                | UINT16 | Wh   | 1     | Rated Battery Capacity                                             |
 | R29                 | 28      | Battery Mode                | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
 | R32                 | 31      | Battery Power               | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
 | R33                 | 32      | Battery SOC                 | UINT16 | %    | 1     | State of Charge (0-100%)                                           |
 | **SOLAR / PV**      |
 | R23                 | 22      | PV1 Power                   | UINT16 | W    | 1     | Solar Panel String 1 Power                                         |
 | R26                 | 25      | PV2 Power                   | UINT16 | W    | 1     | Solar Panel String 2 Power                                         |
+| R11                 | 10/11   | Total PV Generation         | UINT32 | Wh   | 1     | Total Daily PV Generation? (May include battery discharge?)        |
 | **GRID**            |
 | R40                 | 39      | Grid Frequency              | UINT16 | Hz   | 0.01  | AC Grid Frequency (e.g., 5000 = 50.00 Hz)                          |
 | R43                 | 42      | Grid AC Voltage             | UINT16 | V    | 0.1   | AC Grid Voltage (e.g., 2300 = 230.0V)                              |
@@ -58,7 +60,7 @@ These registers are read-only and contain real-time measurements.
 | **LOAD**            |
 | R91                 | 90      | Load Power                  | UINT16 | W    | 1     | Total household load power                                         |
 | **INVERTER STATUS** |
-| R7                  | 7       | Inverter Module Temperature | INT16  | °C   | 0.1   | Inverter internal temperature                                      |
+| R8                  | 7       | Inverter Module Temperature | INT16  | °C   | 0.1   | Inverter internal temperature                                      |
 | R58                 | 57      | External PV AC Voltage      | UINT16 | V    | 0.1   | External AC voltage reading                                        |
 | R76                 | 75      | Internal PV AC Voltage      | UINT16 | V    | 0.1   | Internal AC voltage reading                                        |
 
