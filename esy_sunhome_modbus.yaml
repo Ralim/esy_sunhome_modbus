@@ -367,6 +367,22 @@ sensor:
       - multiply: 0.1
     accuracy_decimals: 1
 
+  # Register 8 (Address 7) - External PV AC Voltage
+  - platform: modbus_controller
+    modbus_controller_id: sunhome
+    id: inverter_temperature
+    name: "Inverter Temperature"
+    register_type: read
+    address: 7
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    icon: "mdi:thermometer"
+    value_type: S_WORD
+    filters:
+      - multiply: 0.1
+    accuracy_decimals: 1
+
   # Register 76 (Address 75) - Internal PV AC Voltage
   - platform: modbus_controller
     modbus_controller_id: sunhome

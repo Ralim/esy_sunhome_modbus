@@ -36,30 +36,31 @@ All registers discovered and documented below. Addresses shown are 0-based (as u
 
 These registers are read-only and contain real-time measurements.
 
-| Register            | Address | Name                   | Type   | Unit | Scale | Description                                                        |
-| ------------------- | ------- | ---------------------- | ------ | ---- | ----- | ------------------------------------------------------------------ |
+| Register            | Address | Name                        | Type   | Unit | Scale | Description                                                        |
+| ------------------- | ------- | --------------------------- | ------ | ---- | ----- | ------------------------------------------------------------------ |
 | **HARDWARE**        |
-| R1                  | 1       | MCU SW Version         | UINT16 | -    | 1     | MCU Software Version                                               |
-| R2                  | 2       | DSP SW Version         | UINT16 | -    | 1     | DSP Software Version                                               |
-| R3                  | 3       | MCU HW Version         | UINT16 | -    | 1     | MCU Hardware Version                                               |
-| R4                  | 4       | DSP HW Version         | UINT16 | -    | 1     | DSP Hardware Version                                               |
+| R1                  | 1       | MCU SW Version              | UINT16 | -    | 1     | MCU Software Version                                               |
+| R2                  | 2       | DSP SW Version              | UINT16 | -    | 1     | DSP Software Version                                               |
+| R3                  | 3       | MCU HW Version              | UINT16 | -    | 1     | MCU Hardware Version                                               |
+| R4                  | 4       | DSP HW Version              | UINT16 | -    | 1     | DSP Hardware Version                                               |
 | **BATTERY**         |
-| R29                 | 28      | Battery Mode           | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
-| R32                 | 31      | Battery Power          | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
-| R33                 | 32      | Battery SOC            | UINT16 | %    | 1     | State of Charge (0-100%)                                           |
+| R29                 | 28      | Battery Mode                | UINT16 | -    | 1     | 0=Unknown, 1=Charging, 2=Topping, 3=Unknown, 4=Full, 5=Discharging |
+| R32                 | 31      | Battery Power               | INT16  | W    | 1     | Positive=Charging, Negative=Discharging                            |
+| R33                 | 32      | Battery SOC                 | UINT16 | %    | 1     | State of Charge (0-100%)                                           |
 | **SOLAR / PV**      |
-| R23                 | 22      | PV1 Power              | UINT16 | W    | 1     | Solar Panel String 1 Power                                         |
-| R26                 | 25      | PV2 Power              | UINT16 | W    | 1     | Solar Panel String 2 Power                                         |
+| R23                 | 22      | PV1 Power                   | UINT16 | W    | 1     | Solar Panel String 1 Power                                         |
+| R26                 | 25      | PV2 Power                   | UINT16 | W    | 1     | Solar Panel String 2 Power                                         |
 | **GRID**            |
-| R40                 | 39      | Grid Frequency         | UINT16 | Hz   | 0.01  | AC Grid Frequency (e.g., 5000 = 50.00 Hz)                          |
-| R43                 | 42      | Grid AC Voltage        | UINT16 | V    | 0.1   | AC Grid Voltage (e.g., 2300 = 230.0V)                              |
-| R50                 | 49      | Grid Power             | INT16  | W    | 1     | Positive=Import, Negative=Export                                   |
-| R55                 | 54      | Grid Frequency Alt     | UINT16 | Hz   | 0.01  | Alternate frequency reading                                        |
+| R40                 | 39      | Grid Frequency              | UINT16 | Hz   | 0.01  | AC Grid Frequency (e.g., 5000 = 50.00 Hz)                          |
+| R43                 | 42      | Grid AC Voltage             | UINT16 | V    | 0.1   | AC Grid Voltage (e.g., 2300 = 230.0V)                              |
+| R50                 | 49      | Grid Power                  | INT16  | W    | 1     | Positive=Import, Negative=Export                                   |
+| R55                 | 54      | Grid Frequency Alt          | UINT16 | Hz   | 0.01  | Alternate frequency reading                                        |
 | **LOAD**            |
-| R91                 | 90      | Load Power             | UINT16 | W    | 1     | Total household load power                                         |
+| R91                 | 90      | Load Power                  | UINT16 | W    | 1     | Total household load power                                         |
 | **INVERTER STATUS** |
-| R58                 | 57      | External PV AC Voltage | UINT16 | V    | 0.1   | External AC voltage reading                                        |
-| R76                 | 75      | Internal PV AC Voltage | UINT16 | V    | 0.1   | Internal AC voltage reading                                        |
+| R7                  | 7       | Inverter Module Temperature | INT16  | °C   | 0.1   | Inverter internal temperature                                      |
+| R58                 | 57      | External PV AC Voltage      | UINT16 | V    | 0.1   | External AC voltage reading                                        |
+| R76                 | 75      | Internal PV AC Voltage      | UINT16 | V    | 0.1   | Internal AC voltage reading                                        |
 
 ### Holding Registers (Function Code 3)
 
